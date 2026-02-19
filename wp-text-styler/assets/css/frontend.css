@@ -1,0 +1,20 @@
+/*
+ * WP Text Styler – Frontend Base Styles
+ *
+ * Static layout rules for highlight spans and styled boxes.
+ * Color/decoration values are injected dynamically by class-css-generator.php.
+ */
+
+/* ── Highlights ───────────────────────────────────────────────────────────── */
+[class^="plugin-highlight-"],
+[class*=" plugin-highlight-"] {
+	padding: 0 2px;
+	border-radius: 3px;
+}
+
+/* ── Boxes ────────────────────────────────────────────────────────────────── */
+[class^="plugin-box-"],
+[class*=" plugin-box-"] {
+	display: block;
+	box-sizing: border-box;
+}

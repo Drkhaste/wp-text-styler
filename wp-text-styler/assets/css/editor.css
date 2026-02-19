@@ -1,0 +1,25 @@
+/*
+ * WP Text Styler – Editor Styles
+ * Loaded inside the TinyMCE iframe so highlights/boxes show during editing.
+ * Dynamic color rules are injected via the AJAX endpoint in class-css-generator.php
+ */
+
+/* Toolbar button styling */
+.mce-btn.wp-text-styler-btn .mce-txt {
+	font-weight: 600;
+	font-size: 12px;
+}
+
+/* Generic box display inside the editor */
+[class^="plugin-box-"],
+[class*=" plugin-box-"] {
+	display: block;
+	margin: 12px 0;
+}
+
+/* Generic highlight display inside the editor */
+[class^="plugin-highlight-"],
+[class*=" plugin-highlight-"] {
+	padding: 0 2px;
+	border-radius: 3px;
+}
