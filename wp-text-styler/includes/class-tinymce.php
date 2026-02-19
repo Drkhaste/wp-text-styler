@@ -101,8 +101,11 @@ class WP_Text_Styler_TinyMCE {
 	 */
 	public static function print_js_config() {
 		// Only on post-editing screens.
-		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
-		if ( $screen && ! in_array( $screen->base, array( 'post', 'page' ), true ) ) {
+		$screen      = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+		$post_types  = get_option( 'wp_text_styler_post_types', array( 'post', 'page' ) );
+		$is_post_scr = $screen && 'post' === $screen->base;
+
+		if ( $is_post_scr && ! in_array( $screen->post_type, (array) $post_types, true ) ) {
 			return;
 		}
 

@@ -292,6 +292,26 @@ class WP_Text_Styler_Settings_Page {
 
 				<?php submit_button( esc_html__( 'Save Settings', 'wp-text-styler' ) ); ?>
 			</form>
+
+			<hr style="margin-top: 40px;">
+			<h2><?php esc_html_e( 'Theme Integration Guide', 'wp-text-styler' ); ?> / <?php esc_html_e( 'راهنمای استفاده در قالب', 'wp-text-styler' ); ?></h2>
+			<p><?php esc_html_e( 'If the styles are not appearing in your custom post type templates, make sure you are applying the necessary filters to your content output.', 'wp-text-styler' ); ?></p>
+			<p><strong><?php esc_html_e( 'اگر استایل‌ها در قالب‌های اختصاصی شما نمایش داده نمی‌شوند، مطمئن شوید که فیلترهای لازم را روی خروجی محتوا اعمال می‌کنید.', 'wp-text-styler' ); ?></strong></p>
+
+			<table class="form-table">
+				<tr>
+					<th><?php esc_html_e( 'Standard Content', 'wp-text-styler' ); ?></th>
+					<td>
+						<pre style="background:#f0f0f0; padding:10px; border-radius:4px;"><code>&lt;?php echo apply_filters( 'the_content', get_the_content() ); ?&gt;</code></pre>
+					</td>
+				</tr>
+				<tr>
+					<th><?php esc_html_e( 'Custom Fields (e.g. ACF)', 'wp-text-styler' ); ?></th>
+					<td>
+						<pre style="background:#f0f0f0; padding:10px; border-radius:4px;"><code>&lt;?php echo apply_filters( 'the_content', get_post_meta( get_the_ID(), 'field_name', true ) ); ?&gt;</code></pre>
+					</td>
+				</tr>
+			</table>
 		</div>
 		<?php
 	}

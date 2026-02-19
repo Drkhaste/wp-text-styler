@@ -26,8 +26,11 @@ class WP_Text_Styler_Assets {
 			WP_TEXT_STYLER_VERSION
 		);
 
-		$screen = get_current_screen();
-		if ( $screen && in_array( $screen->base, array( 'post', 'page' ), true ) ) {
+		$screen      = get_current_screen();
+		$post_types  = get_option( 'wp_text_styler_post_types', array( 'post', 'page' ) );
+		$is_post_scr = $screen && 'post' === $screen->base;
+
+		if ( $is_post_scr && in_array( $screen->post_type, (array) $post_types, true ) ) {
 			wp_enqueue_style( 'wp-text-styler-editor' );
 		}
 
