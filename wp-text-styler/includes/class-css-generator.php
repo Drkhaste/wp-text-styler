@@ -99,8 +99,11 @@ class WP_Text_Styler_CSS_Generator {
 	 * Enqueue generated CSS in the admin (for the editor preview).
 	 */
 	public static function enqueue_admin_css() {
-		$screen = get_current_screen();
-		if ( ! $screen || ! in_array( $screen->base, array( 'post', 'page' ), true ) ) {
+		$screen      = get_current_screen();
+		$post_types  = get_option( 'wp_text_styler_post_types', array( 'post', 'page' ) );
+		$is_post_scr = $screen && 'post' === $screen->base;
+
+		if ( ! $is_post_scr || ! in_array( $screen->post_type, (array) $post_types, true ) ) {
 			return;
 		}
 		wp_add_inline_style( 'wp-text-styler-editor', self::get_css() );
