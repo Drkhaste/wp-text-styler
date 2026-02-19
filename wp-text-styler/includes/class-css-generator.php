@@ -100,10 +100,12 @@ class WP_Text_Styler_CSS_Generator {
 	 */
 	public static function enqueue_admin_css() {
 		$screen = get_current_screen();
-		if ( ! $screen || ! in_array( $screen->base, array( 'post', 'page' ), true ) ) {
-			return;
+		if ( $screen && 'post' === $screen->base ) {
+			$allowed = get_option( 'wp_text_styler_post_types', array( 'post', 'page' ) );
+			if ( in_array( $screen->post_type, (array) $allowed, true ) ) {
+				wp_add_inline_style( 'wp-text-styler-editor', self::get_css() );
+			}
 		}
-		wp_add_inline_style( 'wp-text-styler-editor', self::get_css() );
 	}
 
 	/**
