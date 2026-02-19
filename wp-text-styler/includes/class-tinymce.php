@@ -44,15 +44,30 @@ class WP_Text_Styler_TinyMCE {
 	 * Register the external TinyMCE plugin JS file.
 	 */
 	public static function register_plugin( $plugins ) {
+		$screen = get_current_screen();
+		if ( $screen && 'post' === $screen->base ) {
+			$allowed = get_option( 'wp_text_styler_post_types', array( 'post', 'page' ) );
+			if ( ! in_array( $screen->post_type, (array) $allowed, true ) ) {
+				return $plugins;
+			}
+		}
+
 		$plugins['wp_text_styler'] = WP_TEXT_STYLER_URL . 'assets/js/tinymce-plugin.js?ver=' . WP_TEXT_STYLER_VERSION;
 		return $plugins;
 	}
 
 	/**
 	 * Add buttons to toolbar.
-	 * Always adds them - post type check happens at render time via print_js_config.
 	 */
 	public static function register_buttons( $buttons ) {
+		$screen = get_current_screen();
+		if ( $screen && 'post' === $screen->base ) {
+			$allowed = get_option( 'wp_text_styler_post_types', array( 'post', 'page' ) );
+			if ( ! in_array( $screen->post_type, (array) $allowed, true ) ) {
+				return $buttons;
+			}
+		}
+
 		$buttons[] = 'separator';
 		$buttons[] = 'wpts_hl_yellow';
 		$buttons[] = 'wpts_hl_green';
@@ -102,7 +117,12 @@ class WP_Text_Styler_TinyMCE {
 	public static function print_js_config() {
 		// Only on post-editing screens.
 		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
-		if ( $screen && ! in_array( $screen->base, array( 'post', 'page' ), true ) ) {
+		if ( $screen && 'post' === $screen->base ) {
+			$allowed = get_option( 'wp_text_styler_post_types', array( 'post', 'page' ) );
+			if ( ! in_array( $screen->post_type, (array) $allowed, true ) ) {
+				return;
+			}
+		} else {
 			return;
 		}
 

@@ -290,6 +290,22 @@ class WP_Text_Styler_Settings_Page {
 					<?php endforeach; ?>
 				</fieldset>
 
+				<!-- ===================== THEME INTEGRATION ===================== -->
+				<hr style="margin-top:3em;">
+				<h2 style="margin-top:2em;"><?php esc_html_e( 'Theme Integration Guide', 'wp-text-styler' ); ?></h2>
+				<p><?php esc_html_e( 'If you are using custom templates or displaying content outside the standard WordPress loop (like Custom Post Types or custom fields), follow these steps to ensure styles are applied:', 'wp-text-styler' ); ?></p>
+				<ol>
+					<li>
+						<strong><?php esc_html_e( 'Use the_content filter:', 'wp-text-styler' ); ?></strong><br>
+						<?php esc_html_e( 'Ensure your content is passed through the filter so that WordPress and other plugins can process it correctly. This is often required for custom templates to render styled content.', 'wp-text-styler' ); ?>
+						<pre style="background:#f0f0f0; padding:10px; border-radius:4px; margin:10px 0;"><code>echo apply_filters( 'the_content', $my_custom_content );</code></pre>
+					</li>
+					<li>
+						<strong><?php esc_html_e( 'Check for wp_head() and wp_footer():', 'wp-text-styler' ); ?></strong><br>
+						<?php esc_html_e( 'Your theme must include these calls in header.php and footer.php respectively for the plugin styles to be enqueued.', 'wp-text-styler' ); ?>
+					</li>
+				</ol>
+
 				<?php submit_button( esc_html__( 'Save Settings', 'wp-text-styler' ) ); ?>
 			</form>
 		</div>
