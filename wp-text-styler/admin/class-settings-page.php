@@ -304,6 +304,11 @@ class WP_Text_Styler_Settings_Page {
 						<strong><?php esc_html_e( 'Check for wp_head() and wp_footer():', 'wp-text-styler' ); ?></strong><br>
 						<?php esc_html_e( 'Your theme must include these calls in header.php and footer.php respectively for the plugin styles to be enqueued.', 'wp-text-styler' ); ?>
 					</li>
+					<li>
+						<strong><?php esc_html_e( 'Manual CSS Inclusion (Optional):', 'wp-text-styler' ); ?></strong><br>
+						<?php esc_html_e( 'If the styles still do not appear, you can manually copy the generated CSS below and add it to your theme’s style.css file:', 'wp-text-styler' ); ?>
+						<textarea readonly style="width:100%; height:120px; font-family:monospace; background:#f9f9f9; margin-top:10px;"><?php echo esc_textarea( WP_Text_Styler_CSS_Generator::get_css() ); ?></textarea>
+					</li>
 				</ol>
 
 				<?php submit_button( esc_html__( 'Save Settings', 'wp-text-styler' ) ); ?>
